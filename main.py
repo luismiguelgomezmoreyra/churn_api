@@ -7,7 +7,7 @@ import datetime
 import io
 from typing import List, Optional, Dict, Any
 from fastapi import FastAPI, HTTPException, Depends, UploadFile, File, Query
-from fastapi.responses import FileResponse, StreamingResponse
+from fastapi.responses import FileResponse, StreamingResponse, RedirectResponse
 from pydantic import BaseModel, Field
 from sqlalchemy import create_engine, Column, Integer, String, Float, DateTime, JSON, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
@@ -141,6 +141,10 @@ def get_recommendation(prob: float, data: CustomerData) -> str:
     return "Acción inmediata: Llamada de fidelización y oferta personalizada."
 
 # --- SYSTEM ENDPOINTS ---
+@app.get("/", include_in_schema=False)
+async def root_redirect():
+    return RedirectResponse(url="/docs")
+
 @app.get("/health", response_model=HealthResponse, tags=["Sistema"])
 async def health():
     uptime = str(datetime.datetime.utcnow() - START_TIME)

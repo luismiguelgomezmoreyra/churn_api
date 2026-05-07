@@ -1,0 +1,6 @@
+venv/
+__pycache__/
+*.pyc
+.env
+churn_app.db
+.ipynb_checkpoints/

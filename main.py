@@ -23,25 +23,13 @@ class ClientDB(Base):
     __tablename__ = "clients"
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String)
-    gender = Column(String)
-    SeniorCitizen = Column(Integer)
-    Partner = Column(String)
-    Dependents = Column(String)
     tenure = Column(Integer)
-    PhoneService = Column(String)
-    MultipleLines = Column(String)
-    InternetService = Column(String)
-    OnlineSecurity = Column(String)
-    OnlineBackup = Column(String)
-    DeviceProtection = Column(String)
-    TechSupport = Column(String)
-    StreamingTV = Column(String)
-    StreamingMovies = Column(String)
-    Contract = Column(String)
-    PaperlessBilling = Column(String)
-    PaymentMethod = Column(String)
-    MonthlyCharges = Column(Float)
-    TotalCharges = Column(Float)
+    monthly_charges = Column(Float)
+    total_charges = Column(Float)
+    support_calls = Column(Integer)
+    contract_type = Column(String)
+    internet_service = Column(String)
+    payment_method = Column(String)
     created_at = Column(DateTime, default=datetime.datetime.utcnow)
 
 class PredictionHistoryDB(Base):
@@ -66,25 +54,13 @@ def get_db():
 
 # --- MODELS ---
 class CustomerData(BaseModel):
-    gender: str
-    SeniorCitizen: int
-    Partner: str
-    Dependents: str
     tenure: int
-    PhoneService: str
-    MultipleLines: str
-    InternetService: str
-    OnlineSecurity: str
-    OnlineBackup: str
-    DeviceProtection: str
-    TechSupport: str
-    StreamingTV: str
-    StreamingMovies: str
-    Contract: str
-    PaperlessBilling: str
-    PaymentMethod: str
-    MonthlyCharges: float
-    TotalCharges: float
+    monthly_charges: float
+    total_charges: float
+    support_calls: int
+    contract_type: str
+    internet_service: str
+    payment_method: str
 
 class ClientCreate(CustomerData):
     name: str
